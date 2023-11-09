@@ -1,4 +1,4 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, SafeAreaView} from 'react-native';
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
@@ -13,7 +13,7 @@ const HomeScreen = () => {
   const style = useThemedStyles(styles);
   // const theme = useTheme();
   return (
-    <View>
+    <SafeAreaView>
       <View style={style.headerContainer}>
         <View style={style.innerHeaderContainer}>
           <Image
@@ -31,7 +31,7 @@ const HomeScreen = () => {
           />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

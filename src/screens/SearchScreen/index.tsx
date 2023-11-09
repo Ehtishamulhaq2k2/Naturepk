@@ -1,4 +1,4 @@
-import {View, TextInput, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet, SafeAreaView} from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
@@ -6,20 +6,22 @@ import {useNavigation} from '@react-navigation/native';
 const SearchScreen = () => {
   const navigation = useNavigation();
   return (
-    <View style={style.searchBarContianer}>
-      <AntDesign
-        name="arrowleft"
-        size={30}
-        color={'black'}
-        onPress={() => navigation.goBack()}
-      />
-      <TextInput
-        style={style.searchBarstyle}
-        placeholder="Search Nature PK"
-        autoCorrect={false}
-        placeholderTextColor={'gray'}
-      />
-    </View>
+    <SafeAreaView>
+      <View style={style.searchBarContianer}>
+        <AntDesign
+          name="arrowleft"
+          size={30}
+          color={'black'}
+          onPress={() => navigation.goBack()}
+        />
+        <TextInput
+          style={style.searchBarstyle}
+          placeholder="Search Nature PK"
+          autoCorrect={false}
+          placeholderTextColor={'gray'}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

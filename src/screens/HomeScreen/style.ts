@@ -20,7 +20,7 @@ export const styles = (theme: Theme) =>
       borderRadius: 15,
     },
     headerText: {
-      fontFamily: 'Kanit-ExtraBold',
+      fontFamily: 'KanitExtra-BOLD',
       color: theme.colors.TEXT,
       fontSize: 37,
       // fontWeight: 'bold',
