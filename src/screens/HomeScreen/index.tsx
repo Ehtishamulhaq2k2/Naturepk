@@ -30,6 +30,7 @@ const HomeScreen = () => {
             onPress={() => navigation.navigate('Search' as never)}
           />
         </View>
+        <Text>Logout</Text>
       </View>
     </SafeAreaView>
   );
