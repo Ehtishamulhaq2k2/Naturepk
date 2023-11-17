@@ -1,10 +1,11 @@
 import {View, Text, Image, SafeAreaView} from 'react-native';
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 
 // import useTheme from '../../constants/theming/themeProvider';
-import useThemedStyles from '../../constants/theming/useThemedStyles';
+import useThemedStyles from '../../../constants/theming/useThemedStyles';
 import {styles} from './style';
 
 const HomeScreen = () => {
@@ -18,7 +19,7 @@ const HomeScreen = () => {
         <View style={style.innerHeaderContainer}>
           <Image
             style={style.headerLogo}
-            source={require('../../../src/assets/naturePkLogo.png')}
+            source={require('../../../assets/naturePkLogo.png')}
           />
           <Text style={style.headerText}>NaturePk</Text>
         </View>
@@ -29,8 +30,13 @@ const HomeScreen = () => {
             color="black"
             onPress={() => navigation.navigate('Search' as never)}
           />
+          <Ionicons
+            name="settings"
+            size={25}
+            color="black"
+            onPress={() => navigation.navigate('Setting' as never)}
+          />
         </View>
-        <Text>Logout</Text>
       </View>
     </SafeAreaView>
   );

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {Theme} from '../../constants/theming/themeProvider';
+import {Theme} from '../../../constants/theming/themeProvider';
 
 export const styles = (theme: Theme) =>
   StyleSheet.create({
@@ -20,7 +20,7 @@ export const styles = (theme: Theme) =>
       borderRadius: 15,
     },
     headerText: {
-      fontFamily: 'KanitExtra-BOLD',
+      fontFamily: 'KanitExtra-Bold',
       color: theme.colors.TEXT,
       fontSize: 37,
       // fontWeight: 'bold',
@@ -36,6 +36,9 @@ export const styles = (theme: Theme) =>
 
     iconContainer: {
       alignSelf: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       marginRight: 10,
+      width: 60,
     },
   });
