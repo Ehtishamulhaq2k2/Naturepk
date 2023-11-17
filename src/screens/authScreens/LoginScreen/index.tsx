@@ -42,6 +42,7 @@ const LoginScreen = () => {
   };
   const handleLogin = () => {
     login({email, password});
+    console.log('clicked');
   };
 
   return (
@@ -93,6 +94,7 @@ const LoginScreen = () => {
                 size={40}
                 color="#367CFE"
                 onPress={handleLogin}
+                disabled={!email && !password}
               />
             </View>
             <View style={styles.signupButtonContainer}>
