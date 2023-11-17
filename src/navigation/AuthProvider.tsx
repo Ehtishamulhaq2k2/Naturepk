@@ -11,6 +11,7 @@ interface AuthContextType {
   login: (credentials: {email: string; password: string}) => Promise<void>;
   register: (credentials: {email: string; password: string}) => Promise<void>;
   logout: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 type AuthProviderProps = {
@@ -67,6 +68,13 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
         logout: async () => {
           try {
             await auth().signOut();
+          } catch (e) {
+            console.error(e);
+          }
+        },
+        resetPassword: async (email: string) => {
+          try {
+            await auth().sendPasswordResetEmail(email);
           } catch (e) {
             console.error(e);
           }
