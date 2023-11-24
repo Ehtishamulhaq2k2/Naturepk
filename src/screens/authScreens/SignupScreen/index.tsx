@@ -13,6 +13,9 @@ import {AuthContext} from '../../../navigation/AuthProvider';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 
+// Email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,17 +30,27 @@ const SignUpScreen = () => {
 
   const {register, signupError, setSignupError} = authContext;
 
-  const handleInputChange = text => {
+  const handleInputChange = (text: React.SetStateAction<string>) => {
     setEmail(text);
     if (signupError) {
       setSignupError(null); // Clear the loginError when the user starts typing
     }
   };
-  const handlePasswordChange = text => {
+  const handlePasswordChange = (text: React.SetStateAction<string>) => {
     setPassword(text);
     if (signupError) {
       setSignupError(null); // Clear the loginError when the user starts typing
     }
+  };
+
+  const handleSignup = () => {
+    if (!emailRegex.test(email)) {
+      setSignupError('Please enter a valid email address');
+      return;
+    }
+
+    register({email, password});
+    console.log('clicked');
   };
   return (
     <SafeAreaView style={styles.containerView}>
@@ -79,7 +92,7 @@ const SignUpScreen = () => {
                 name="arrow-circle-right"
                 size={40}
                 color="#367CFE"
-                onPress={() => register({email, password})}
+                onPress={handleSignup}
               />
             </View>
 

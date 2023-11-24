@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   /*--------------------------------------------------------------- */
 
-  signupScreenContainer: {
+  forgotPasswordContainer: {
     flex: 1,
     backgroundColor: 'transparent',
   },

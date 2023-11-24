@@ -14,7 +14,10 @@ import {AuthContext} from '../../../navigation/AuthProvider';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 
-const SignUpScreen = () => {
+// Email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const navigation = useNavigation();
 
@@ -28,14 +31,17 @@ const SignUpScreen = () => {
   const {resetPassword} = authContext;
 
   const handleResetPassword = async () => {
+    // Validate email before attempting password reset
+    if (!emailRegex.test(email)) {
+      Alert.alert('Invalid Email', 'Please enter a valid email address');
+      return;
+    }
     try {
       await resetPassword(email);
       // Handle successful password reset, maybe navigate to a success screen
-      Alert.alert(
-        'Success',
-        'Password Reset Email successfully Sent, Reset Password and login again',
-        [{text: 'OK', onPress: () => navigation.navigate('Login' as never)}],
-      );
+      Alert.alert('Success', 'Password Reset Email sent successfully', [
+        {text: 'OK', onPress: () => navigation.navigate('Login' as never)},
+      ]);
     } catch (err) {
       console.error(err);
       // Handle error internally without displaying it
@@ -45,7 +51,7 @@ const SignUpScreen = () => {
   return (
     <SafeAreaView style={styles.containerView}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.signupScreenContainer}>
+        <View style={styles.forgotPasswordContainer}>
           <View style={styles.topContainer}>
             <Image
               source={require('../../../assets/circleTopBlue.png')}
@@ -93,4 +99,4 @@ const SignUpScreen = () => {
   );
 };
 
-export default SignUpScreen;
+export default ForgotPassword;

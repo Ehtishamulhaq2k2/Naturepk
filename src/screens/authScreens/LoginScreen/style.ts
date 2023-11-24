@@ -1,43 +1,39 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
+console.log(SCREEN_WIDTH);
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
-    // alignItems: 'center',
     backgroundColor: '#D7E5FF',
-    // backgroundColor: 'red',
   },
   topContainer: {
     width: SCREEN_WIDTH,
     height: 300,
-    // alignSelf: 'center',
-    // flex: 1,
   },
   welcomeText: {
     position: 'absolute',
     color: 'white',
+    fontFamily: 'KanitExtra-Bold',
     fontSize: 46,
     fontWeight: '900',
     top: 100,
     width: 170,
     textAlign: 'left',
-    left: 40,
+    left: SCREEN_WIDTH - 350,
   },
   blueElipse: {
     opacity: 0.85,
     position: 'absolute',
     width: '100%',
     height: '100%',
-    flexShrink: 0,
   },
   topElipse: {
     position: 'absolute',
   },
   rightElipse: {
     position: 'relative',
-    left: 250,
-    // bottom: 100,
+    left: SCREEN_WIDTH - 140,
   },
   /*--------------------------------------------------------------- */
 
