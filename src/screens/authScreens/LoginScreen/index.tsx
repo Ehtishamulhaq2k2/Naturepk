@@ -13,6 +13,9 @@ import {useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../../navigation/AuthProvider';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+// Email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,19 +31,24 @@ const LoginScreen = () => {
   const {login, loginError, setLoginError} = authContext;
   console.log('loginError on log ', loginError);
 
-  const handleInputChange = text => {
+  const handleInputChange = (text: React.SetStateAction<string>) => {
     setEmail(text);
     if (loginError) {
       setLoginError(null); // Clear the loginError when the user starts typing
     }
   };
-  const handlePasswordChange = text => {
+  const handlePasswordChange = (text: React.SetStateAction<string>) => {
     setPassword(text);
     if (loginError) {
       setLoginError(null); // Clear the loginError when the user starts typing
     }
   };
   const handleLogin = () => {
+    if (!emailRegex.test(email)) {
+      setLoginError('Please enter a valid email address');
+      return;
+    }
+
     login({email, password});
     console.log('clicked');
   };
@@ -94,7 +102,7 @@ const LoginScreen = () => {
                 size={40}
                 color="#367CFE"
                 onPress={handleLogin}
-                disabled={!email && !password}
+                disabled={!email || !password}
               />
             </View>
             <View style={styles.signupButtonContainer}>
