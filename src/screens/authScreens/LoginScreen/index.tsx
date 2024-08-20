@@ -13,12 +13,44 @@ import {useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../../navigation/AuthProvider';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+
+
 // Email validation
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  GoogleSignin.configure({
+    webClientId: '462242916932-cr3oe8m8kq8pfq8ne1dbohkmp1fjqjlq.apps.googleusercontent.com', 
+    offlineAccess: true, 
+    forceCodeForRefreshToken: true, 
+  });
+
+  async function onGoogleButtonPress() {
+    try {
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+      const { idToken } = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      await auth().signInWithCredential(googleCredential);
+    } catch (e : any) {
+      console.error('Google Sign-In Error: ', e.message);
+      if (e.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (e.code === statusCodes.IN_PROGRESS) {
+        // operation (f.e. sign in) is in progress already
+      } else if (e.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  }
+
 
   const authContext = useContext(AuthContext);
   const navigation = useNavigation();
@@ -34,13 +66,13 @@ const LoginScreen = () => {
   const handleInputChange = (text: React.SetStateAction<string>) => {
     setEmail(text);
     if (loginError) {
-      setLoginError(null); // Clear the loginError when the user starts typing
+      setLoginError(null); 
     }
   };
   const handlePasswordChange = (text: React.SetStateAction<string>) => {
     setPassword(text);
     if (loginError) {
-      setLoginError(null); // Clear the loginError when the user starts typing
+      setLoginError(null); 
     }
   };
   const handleLogin = () => {
@@ -52,7 +84,6 @@ const LoginScreen = () => {
     login({email, password});
     console.log('clicked');
   };
-
   return (
     <SafeAreaView style={styles.containerView}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -103,6 +134,14 @@ const LoginScreen = () => {
                 color="#367CFE"
                 onPress={handleLogin}
                 disabled={!email || !password}
+              />
+            </View>
+            <View>
+              <FontAwesome5
+                name="google"
+                size={40}
+                color="#367CFE"
+                onPress={onGoogleButtonPress}
               />
             </View>
             <View style={styles.signupButtonContainer}>
