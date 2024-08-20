@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     fontSize: 46,
     fontWeight: '900',
     top: 100,
-    width: 170,
     textAlign: 'left',
     left: SCREEN_WIDTH - 350,
   },
